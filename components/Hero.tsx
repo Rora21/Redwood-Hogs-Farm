@@ -9,8 +9,8 @@ export default function Hero() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif italic mb-3 sm:mb-4">Farming with Heart</h1>
           <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8">Sustainable pig farming focused on quality livestock, responsible practices, and supporting farmers in Rwanda.</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <Link href="/about" className="bg-[#b8824f] text-white px-6 sm:px-8 py-3 rounded hover:bg-[#a0703f] text-center">Explore Our Farm</Link>
-            <Link href="/contact" className="border-2 border-white text-white px-6 sm:px-8 py-3 rounded hover:bg-white/10 text-center">Contact Us</Link>
+            <Link href="/about" className="bg-[#b8824f] text-white px-6 sm:px-8 py-3 rounded hover:bg-[#a0703f] transition-colors duration-200 text-center">Explore Our Farm</Link>
+            <Link href="/contact" className="border-2 border-white text-white px-6 sm:px-8 py-3 rounded hover:bg-white/10 transition-colors duration-200 text-center">Contact Us</Link>
           </div>
         </div>
       </div>
