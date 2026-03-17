@@ -7,6 +7,7 @@ const navLinks = [
   { href: '/services', label: 'Services' },
   { href: '/gallery',  label: 'Gallery' },
   { href: '/contact',  label: 'Contact' },
+  { href: '/donate',   label: 'Donate' },
 ]
 
 export default function Footer() {

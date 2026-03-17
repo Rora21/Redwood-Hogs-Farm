@@ -42,6 +42,9 @@ export default function Navbar() {
               </li>
             ))}
             <li>
+              <Link href="/donate" className="bg-[#6b7c5d] text-white px-4 xl:px-5 py-2 rounded hover:bg-[#5a6b4d] transition-colors duration-200 font-medium whitespace-nowrap">Donate</Link>
+            </li>
+            <li>
               <Link
                 href="/contact"
                 className="bg-[#b8824f] text-white px-4 xl:px-5 py-2 rounded hover:bg-[#a0703f] transition-colors duration-200 font-medium whitespace-nowrap"
@@ -82,6 +85,9 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/donate" onClick={() => setIsOpen(false)} className="block bg-[#6b7c5d] text-white px-4 py-2 rounded hover:bg-[#5a6b4d] transition-colors duration-200 font-medium text-center">Donate</Link>
+            </li>
             <li>
               <Link
                 href="/contact"
