@@ -11,6 +11,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Link href="/about" className="bg-[#b8824f] text-white px-6 sm:px-8 py-3 rounded hover:bg-[#a0703f] transition-colors duration-200 text-center">Explore Our Farm</Link>
             <Link href="/contact" className="border-2 border-white text-white px-6 sm:px-8 py-3 rounded hover:bg-white/10 transition-colors duration-200 text-center">Contact Us</Link>
+            <Link href="/visit" className="bg-[#6b7c5d] text-white px-6 sm:px-8 py-3 rounded hover:bg-[#5a6b4d] transition-colors duration-200 text-center">Book a Visit</Link>
           </div>
         </div>
       </div>

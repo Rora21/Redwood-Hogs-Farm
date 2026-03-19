@@ -6,6 +6,7 @@ const navLinks = [
   { href: '/pigs',     label: 'Our Pigs' },
   { href: '/services', label: 'Services' },
   { href: '/gallery',  label: 'Gallery' },
+  { href: '/visit',    label: 'Visit' },
   { href: '/contact',  label: 'Contact' },
   { href: '/donate',   label: 'Donate' },
 ]

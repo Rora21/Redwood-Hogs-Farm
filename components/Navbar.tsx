@@ -10,6 +10,7 @@ const navLinks = [
   { href: '/pigs',    label: 'Our Pigs' },
   { href: '/services',label: 'Services' },
   { href: '/gallery', label: 'Gallery' },
+  { href: '/visit',   label: 'Visit' },
 ]
 
 export default function Navbar() {
