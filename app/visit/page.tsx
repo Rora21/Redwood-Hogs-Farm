@@ -65,8 +65,8 @@ export default function BookVisit() {
               { src: '/images/redwoodhogs/Redwoodhogs_3.jpg', alt: 'Farm experience', label: 'Farm Experience' },
               { src: '/images/redwoodhogs/Redwoodhogs_5.jpg', alt: 'Meet the pigs', label: 'Meet the Pigs' },
               { src: '/images/redwoodhogs/Redwoodhogs_8.jpg', alt: 'Farm life', label: 'Farm Life' },
-              { src: '/images/redwoodhogs/Redwoodhogs_9.jpg', alt: 'Guided visit', label: 'Guided Visits' },
-              { src: '/images/redwoodhogs/Redwoodhogs_12.jpg', alt: 'Hands-on experience', label: 'Hands-on Experience' },
+              { src: '/images/redwoodhogs/Redwoodhogs_9.jpg', alt: 'Guided visit', label: 'Hands-on Experience' },
+              { src: '/images/redwoodhogs/Redwoodhogs_12.jpg', alt: 'Hands-on experience', label: 'Guided Visits' },
             ].map((img, i) => (
               <div key={i} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group">
                 <div className="relative w-full aspect-video">
