@@ -58,48 +58,32 @@ export default function BookVisit() {
             </p>
           </div>
 
-          {/* Images Grid - Responsive Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-            {/* BIG IMAGE - Takes 2 columns on large screens */}
-            <div className="lg:col-span-2 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="relative w-full aspect-video">
-                <Image
-                  src="/images/Redwoodhogs_1.jpg"
-                  alt="Visitors at Redwood Hogs Farm"
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 66vw"
-                  priority
-                />
-              </div>
-            </div>
-
-            {/* SIDE IMAGES - Stack on mobile, column on large screens */}
-            <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6">
-              <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="relative w-full aspect-square">
+          {/* Images Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { src: '/images/redwoodhogs/Redwoodhogs_1.jpg', alt: 'Visitors at Redwood Hogs Farm', label: 'Farm Tour' },
+              { src: '/images/redwoodhogs/Redwoodhogs_3.jpg', alt: 'Farm experience', label: 'Farm Experience' },
+              { src: '/images/redwoodhogs/Redwoodhogs_5.jpg', alt: 'Meet the pigs', label: 'Meet the Pigs' },
+              { src: '/images/redwoodhogs/Redwoodhogs_8.jpg', alt: 'Farm life', label: 'Farm Life' },
+              { src: '/images/redwoodhogs/Redwoodhogs_9.jpg', alt: 'Guided visit', label: 'Guided Visits' },
+              { src: '/images/redwoodhogs/Redwoodhogs_12.jpg', alt: 'Hands-on experience', label: 'Hands-on Experience' },
+            ].map((img, i) => (
+              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group">
+                <div className="relative w-full aspect-video">
                   <Image
-                    src="/images/Redwoodhogs_3.jpg"
-                    alt="Farm visit learning"
+                    src={img.src}
+                    alt={img.alt}
                     fill
-                    className="object-cover hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    priority={i === 0}
                   />
                 </div>
-              </div>
-
-              <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="relative w-full aspect-square">
-                  <Image
-                    src="/images/Redwoodhogs_5.jpg"
-                    alt="Visitors interacting with pigs"
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-                  />
+                <div className="px-4 py-3">
+                  <p className="text-sm font-semibold text-[#3d4f3d]">{img.label}</p>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
