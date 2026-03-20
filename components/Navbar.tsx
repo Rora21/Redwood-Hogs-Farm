@@ -73,8 +73,12 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        {isOpen && (
-          <ul className="lg:hidden mt-4 space-y-2 pb-4">
+        <div
+          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <ul className="space-y-2 pb-4 pt-2">
             {navLinks.map(({ href, label }) => (
               <li key={href}>
                 <Link
@@ -99,7 +103,7 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>
-        )}
+        </div>
       </div>
     </nav>
   )

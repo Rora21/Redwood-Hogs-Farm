@@ -37,9 +37,9 @@ export default function BookVisit() {
   const inputClass = 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#6b7c5d] focus:ring-2 focus:ring-[#6b7c5d]/20 text-sm sm:text-base placeholder-gray-400'
 
   return (
-    <div className="bg-[#f5f1e8]">
+    <div className="min-h-screen flex flex-col bg-[#f5f1e8]">
       {/* Hero Section */}
-      <section className="relative h-[250px] sm:h-[300px] bg-[#3d4f3d] text-white">
+      <section className="relative h-[250px] sm:h-[300px] bg-[#3d4f3d] text-white flex-shrink-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center">
           <div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif italic mb-2 sm:mb-4">Book a Farm Visit</h1>
@@ -49,7 +49,7 @@ export default function BookVisit() {
       </section>
 
       {/* Farm Visit Experience Section */}
-      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 flex-shrink-0">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl font-serif italic text-[#3d4f3d] mb-3 sm:mb-4">Farm Visit Experience</h2>
@@ -59,7 +59,7 @@ export default function BookVisit() {
           </div>
 
           {/* Images Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 will-change-auto">
             {[
               { src: '/images/redwoodhogs/Redwoodhogs_1.jpg', alt: 'Visitors at Redwood Hogs Farm', label: 'Farm Tour' },
               { src: '/images/redwoodhogs/Redwoodhogs_3.jpg', alt: 'Farm experience', label: 'Farm Experience' },
@@ -68,13 +68,13 @@ export default function BookVisit() {
               { src: '/images/redwoodhogs/Redwoodhogs_9.jpg', alt: 'Guided visit', label: 'Hands-on Experience' },
               { src: '/images/redwoodhogs/Redwoodhogs_12.jpg', alt: 'Hands-on experience', label: 'Guided Visits' },
             ].map((img, i) => (
-              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group">
-                <div className="relative w-full aspect-video">
+              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group will-change-auto">
+                <div className="relative w-full aspect-video overflow-hidden">
                   <Image
                     src={img.src}
                     alt={img.alt}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 will-change-transform"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     priority={i === 0}
                   />
@@ -89,7 +89,7 @@ export default function BookVisit() {
       </section>
 
       {/* Booking Form Section */}
-      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-white">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-white flex-grow">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* Form */}
@@ -243,7 +243,7 @@ export default function BookVisit() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-[#6b7c5d] text-white">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-[#6b7c5d] text-white flex-shrink-0">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-serif italic mb-3 sm:mb-4">Ready to Visit?</h2>
           <p className="text-base sm:text-lg mb-6 sm:mb-8">Fill out the form above and we&apos;ll confirm your visit within 24 hours!</p>
