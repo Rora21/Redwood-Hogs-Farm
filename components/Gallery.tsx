@@ -1,15 +1,15 @@
 import Image from 'next/image'
 
 const images = [
-  { src: '/images/The Pork House111.JPG',     alt: 'Pigs in the Redwood Hogs Farm facility' },
-  { src: '/images/The Pork House111 (1).JPG', alt: 'Farm pig housing interior at Redwood Hogs Farm' },
-  { src: '/images/The Pork House117.JPG',     alt: 'Healthy pigs raised at Redwood Hogs Farm' },
-  { src: '/images/The Pork House119.JPG',     alt: 'Pig farming operations at Redwood Hogs Farm' },
-  { src: '/images/The Pork House136.JPG',     alt: 'Farm livestock and daily care at Redwood Hogs Farm' },
-  { src: '/images/The Pork House87.JPG',      alt: 'Pigs in outdoor area at Redwood Hogs Farm' },
-  { src: '/images/The Pork House89.JPG',      alt: 'Breeding piglets at Redwood Hogs Farm' },
-  { src: '/images/The Pork House98.JPG',      alt: 'Breeding stock pigs at Redwood Hogs Farm' },
-  { src: '/images/The Pork House108.JPG',     alt: 'Well-fed pigs at Redwood Hogs Farm' },
+  { src: '/images/pork-house/pork-house-111.jpg',  alt: 'Pigs in the Redwood Hogs Farm facility' },
+  { src: '/images/pork-house/pork-house-111b.jpg', alt: 'Farm pig housing interior at Redwood Hogs Farm' },
+  { src: '/images/pork-house/pork-house-117.jpg',  alt: 'Healthy pigs raised at Redwood Hogs Farm' },
+  { src: '/images/pork-house/pork-house-119.jpg',  alt: 'Pig farming operations at Redwood Hogs Farm' },
+  { src: '/images/pork-house/pork-house-136.jpg',  alt: 'Farm livestock and daily care at Redwood Hogs Farm' },
+  { src: '/images/pork-house/pork-house-87.jpg',   alt: 'Pigs in outdoor area at Redwood Hogs Farm' },
+  { src: '/images/pork-house/pork-house-89.jpg',   alt: 'Breeding piglets at Redwood Hogs Farm' },
+  { src: '/images/pork-house/pork-house-98.jpg',   alt: 'Breeding stock pigs at Redwood Hogs Farm' },
+  { src: '/images/pork-house/pork-house-108.jpg',  alt: 'Well-fed pigs at Redwood Hogs Farm' },
 ]
 
 export default function Gallery() {
