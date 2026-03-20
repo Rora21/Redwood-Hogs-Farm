@@ -23,18 +23,18 @@ const services = [
 ]
 
 const galleryImages = [
-  { src: '/images/The Pork House111.JPG', alt: 'Pigs in the Redwood Hogs Farm facility' },
-  { src: '/images/The Pork House111 (1).JPG', alt: 'Farm pig housing interior' },
-  { src: '/images/The Pork House117.JPG', alt: 'Healthy pigs at Redwood Hogs Farm' },
-  { src: '/images/The Pork House119.JPG', alt: 'Pig farming operations at Redwood Hogs Farm' },
-  { src: '/images/The Pork House136.JPG', alt: 'Farm livestock and daily care' },
-  { src: '/images/The Pork House87.JPG', alt: 'Pigs in outdoor area at Redwood Hogs Farm' },
+  { src: '/images/pork-house/pork-house-111.jpg', alt: 'Pigs in the Redwood Hogs Farm facility' },
+  { src: '/images/pork-house/pork-house-111b.jpg', alt: 'Farm pig housing interior' },
+  { src: '/images/pork-house/pork-house-117.jpg', alt: 'Healthy pigs at Redwood Hogs Farm' },
+  { src: '/images/pork-house/pork-house-119.jpg', alt: 'Pig farming operations at Redwood Hogs Farm' },
+  { src: '/images/pork-house/pork-house-136.jpg', alt: 'Farm livestock and daily care' },
+  { src: '/images/pork-house/pork-house-87.jpg', alt: 'Pigs in outdoor area at Redwood Hogs Farm' },
 ]
 
 const pigs = [
-  { name: 'Breeding Piglets', description: 'Strong and healthy piglets raised with proper nutrition and veterinary care. Ideal for farmers looking to start or improve their pig farming operations.', image: '/images/The Pork House89.JPG' },
-  { name: 'Breeding Stock', description: 'High-quality sows and boars selected for strong genetics, productivity, and farm performance.', image: '/images/The Pork House98.JPG' },
-  { name: 'Slaughter Pigs', description: 'Well-raised pigs prepared for market with proper feeding and health management.', image: '/images/The Pork House108.JPG' },
+  { name: 'Breeding Piglets', description: 'Strong and healthy piglets raised with proper nutrition and veterinary care. Ideal for farmers looking to start or improve their pig farming operations.', image: '/images/pork-house/pork-house-89.jpg' },
+  { name: 'Breeding Stock', description: 'High-quality sows and boars selected for strong genetics, productivity, and farm performance.', image: '/images/pork-house/pork-house-98.jpg' },
+  { name: 'Slaughter Pigs', description: 'Well-raised pigs prepared for market with proper feeding and health management.', image: '/images/pork-house/pork-house-108.jpg' },
 ]
 
 export default function Home() {
@@ -54,7 +54,7 @@ export default function Home() {
               <Link href="/about" className="inline-block bg-[#6b7c5d] text-white px-6 sm:px-8 py-3 sm:py-4 rounded hover:bg-[#5a6b4d] transition-colors duration-200 text-base sm:text-lg">Learn More About Us</Link>
             </div>
             <div className="relative h-64 sm:h-80 rounded-lg overflow-hidden">
-              <Image src="/images/The Pork House87.JPG" alt="Pigs at Redwood Hogs Farm" fill className="object-cover" />
+              <Image src="/images/pork-house/pork-house-87.jpg" alt="Pigs at Redwood Hogs Farm" fill className="object-cover" />
             </div>
           </div>
         </div>

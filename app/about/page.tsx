@@ -19,7 +19,7 @@ export default function About() {
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 sm:mb-16">
             <div className="relative h-64 sm:h-80 rounded-lg overflow-hidden">
-              <Image src="/images/The Pork House87.JPG" alt="Pigs at Redwood Hogs Farm" fill className="object-cover" />
+              <Image src="/images/pork-house/pork-house-87.jpg" alt="Pigs at Redwood Hogs Farm" fill className="object-cover" />
             </div>
             <div>
               <h2 className="text-2xl sm:text-3xl font-serif text-[#3d4f3d] mb-4 sm:mb-6">Our Story</h2>

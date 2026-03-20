@@ -3,9 +3,9 @@ import Link from 'next/link'
 
 
 const pigs = [
-  { name: 'Breeding Piglets', description: 'Strong and healthy piglets raised with proper nutrition and veterinary care. Ideal for farmers looking to start or improve their pig farming operations.', image: '/images/The Pork House89.JPG' },
-  { name: 'Breeding Stock',   description: 'High-quality sows and boars selected for strong genetics, productivity, and farm performance.', image: '/images/The Pork House98.JPG' },
-  { name: 'Slaughter Pigs',  description: 'Well-raised pigs prepared for market with proper feeding and health management.', image: '/images/The Pork House108.JPG' },
+  { name: 'Breeding Piglets', description: 'Strong and healthy piglets raised with proper nutrition and veterinary care. Ideal for farmers looking to start or improve their pig farming operations.', image: '/images/pork-house/pork-house-89.jpg' },
+  { name: 'Breeding Stock',   description: 'High-quality sows and boars selected for strong genetics, productivity, and farm performance.', image: '/images/pork-house/pork-house-98.jpg' },
+  { name: 'Slaughter Pigs',  description: 'Well-raised pigs prepared for market with proper feeding and health management.', image: '/images/pork-house/pork-house-108.jpg' },
 ]
 
 export default function Pigs() {
