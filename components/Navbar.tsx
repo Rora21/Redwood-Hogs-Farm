@@ -30,7 +30,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2 sm:gap-3">
             <div className="relative w-12 h-12 sm:w-16 sm:h-16">
-              <Image src="/images/croped.png" alt="Redwood Hogs Farm logo" fill className="object-contain" />
+              <Image src="/images/logo.jpg" alt="Redwood Hogs Farm logo" fill className="object-contain" />
             </div>
             <span className="text-lg sm:text-xl font-semibold text-[#3d4f3d]">Redwood Hogs Farm</span>
           </Link>
