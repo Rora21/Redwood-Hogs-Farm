@@ -3,6 +3,8 @@ import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import cookieParser from 'cookie-parser'
+import swaggerUi from 'swagger-ui-express'
+import { swaggerSpec } from './config/swagger'
 
 import authRoutes from './routes/auth'
 import pigsRoutes from './routes/pigs'
@@ -37,6 +39,10 @@ app.use('/api/upload', uploadRoutes)
 
 // Health check
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }))
+
+// Swagger UI — available at /api/docs
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+app.get('/api/docs.json', (_req, res) => res.json(swaggerSpec))
 
 app.use(errorHandler)
 

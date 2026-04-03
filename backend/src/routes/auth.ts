@@ -1,3 +1,10 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Authentication
+ */
+
 import { Router, Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
@@ -9,6 +16,39 @@ const COOKIE = process.env.COOKIE_NAME || 'admin_token'
 const EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d'
 const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000
 
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Log in as admin
+ *     tags: [Auth]
+ *     security: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [email, password]
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: admin@redwoodhogsfarm.com
+ *               password:
+ *                 type: string
+ *                 example: changeme123
+ *     responses:
+ *       200:
+ *         description: Login successful — sets HttpOnly `admin_token` cookie
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/MessageResponse'
+ *       400:
+ *         description: Missing email or password
+ *       401:
+ *         description: Invalid credentials
+ */
 router.post('/login', async (req: Request, res: Response): Promise<void> => {
   const { email, password } = req.body
   if (!email || !password) {
@@ -33,7 +73,7 @@ router.post('/login', async (req: Request, res: Response): Promise<void> => {
     const token = jwt.sign(
       { id: admin.id, email: admin.email },
       process.env.JWT_SECRET as string,
-      { expiresIn: EXPIRES_IN }
+      { expiresIn: EXPIRES_IN as any }
     )
 
     res.cookie(COOKIE, token, {
@@ -50,11 +90,44 @@ router.post('/login', async (req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   post:
+ *     summary: Log out and clear the session cookie
+ *     tags: [Auth]
+ *     responses:
+ *       200:
+ *         description: Logged out
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/MessageResponse'
+ */
 router.post('/logout', (_req: Request, res: Response) => {
   res.clearCookie(COOKIE)
   res.json({ message: 'Logged out' })
 })
 
+/**
+ * @swagger
+ * /api/auth/me:
+ *   get:
+ *     summary: Get the currently authenticated admin
+ *     tags: [Auth]
+ *     responses:
+ *       200:
+ *         description: Current admin identity
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:    { type: integer, example: 1 }
+ *                 email: { type: string, example: admin@redwoodhogsfarm.com }
+ *       401:
+ *         description: Not authenticated
+ */
 router.get('/me', verifyToken, (req: AuthRequest, res: Response) => {
   res.json({ id: req.user?.id, email: req.user?.email })
 })

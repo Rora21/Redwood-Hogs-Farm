@@ -1,3 +1,10 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Gallery
+ *   description: Photo gallery management
+ */
+
 import { Router, Request, Response } from 'express'
 import fs from 'fs'
 import path from 'path'
@@ -10,6 +17,22 @@ router.use(verifyToken)
 
 const uploadsDir = path.resolve(process.env.UPLOADS_DIR || '../public/images/uploads')
 
+/**
+ * @swagger
+ * /api/gallery:
+ *   get:
+ *     summary: List all gallery images
+ *     tags: [Gallery]
+ *     responses:
+ *       200:
+ *         description: Array of gallery image records
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/GalleryImage'
+ */
 router.get('/', async (_req: Request, res: Response): Promise<void> => {
   try {
     const result = await query(
@@ -22,6 +45,28 @@ router.get('/', async (_req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/gallery/{id}:
+ *   get:
+ *     summary: Get a gallery image by ID
+ *     tags: [Gallery]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Gallery image record
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GalleryImage'
+ *       404:
+ *         description: Image not found
+ */
 router.get('/:id', async (req: Request, res: Response): Promise<void> => {
   try {
     const result = await query('SELECT * FROM gallery_images WHERE id = $1', [req.params.id])
@@ -36,6 +81,40 @@ router.get('/:id', async (req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/gallery:
+ *   post:
+ *     summary: Upload an image and add it to the gallery
+ *     tags: [Gallery]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             required: [image]
+ *             properties:
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *                 description: Image file (JPEG, PNG, WebP, or GIF, max 10 MB)
+ *               alt:
+ *                 type: string
+ *                 example: Pigs grazing in the field
+ *               sort_order:
+ *                 type: integer
+ *                 example: 0
+ *     responses:
+ *       201:
+ *         description: Created gallery image record
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GalleryImage'
+ *       400:
+ *         description: No file uploaded or invalid file type
+ */
 // Upload image and insert gallery record
 router.post('/', (req: Request, res: Response): void => {
   uploadSingle(req, res, async (err) => {
@@ -65,6 +144,38 @@ router.post('/', (req: Request, res: Response): void => {
   })
 })
 
+/**
+ * @swagger
+ * /api/gallery/{id}:
+ *   patch:
+ *     summary: Update gallery image metadata
+ *     tags: [Gallery]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               alt:        { type: string }
+ *               sort_order: { type: integer }
+ *               is_active:  { type: boolean }
+ *     responses:
+ *       200:
+ *         description: Updated gallery image
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GalleryImage'
+ *       404:
+ *         description: Image not found
+ */
 router.patch('/:id', async (req: Request, res: Response): Promise<void> => {
   const { alt, sort_order, is_active } = req.body
   try {
@@ -85,6 +196,26 @@ router.patch('/:id', async (req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/gallery/{id}:
+ *   delete:
+ *     summary: Delete a gallery image and its file
+ *     tags: [Gallery]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Deleted
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/MessageResponse'
+ */
 router.delete('/:id', async (req: Request, res: Response): Promise<void> => {
   try {
     const result = await query('SELECT src FROM gallery_images WHERE id = $1', [req.params.id])
@@ -102,6 +233,34 @@ router.delete('/:id', async (req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/gallery/reorder/batch:
+ *   patch:
+ *     summary: Batch reorder gallery images
+ *     tags: [Gallery]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: array
+ *             items:
+ *               type: object
+ *               required: [id, sort_order]
+ *               properties:
+ *                 id:         { type: integer }
+ *                 sort_order: { type: integer }
+ *     responses:
+ *       200:
+ *         description: Reordered
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/MessageResponse'
+ *       400:
+ *         description: Expected an array of {id, sort_order}
+ */
 // Batch reorder
 router.patch('/reorder/batch', async (req: Request, res: Response): Promise<void> => {
   const items: { id: number; sort_order: number }[] = req.body

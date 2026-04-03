@@ -1,3 +1,10 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Services
+ *   description: Farm services management
+ */
+
 import { Router, Request, Response } from 'express'
 import { query } from '../config/db'
 import { verifyToken } from '../middleware/auth'
@@ -5,6 +12,22 @@ import { verifyToken } from '../middleware/auth'
 const router = Router()
 router.use(verifyToken)
 
+/**
+ * @swagger
+ * /api/services:
+ *   get:
+ *     summary: List all services
+ *     tags: [Services]
+ *     responses:
+ *       200:
+ *         description: Array of service records
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Service'
+ */
 router.get('/', async (_req: Request, res: Response): Promise<void> => {
   try {
     const result = await query('SELECT * FROM services ORDER BY sort_order ASC, created_at ASC')
@@ -15,6 +38,28 @@ router.get('/', async (_req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/services/{id}:
+ *   get:
+ *     summary: Get a service by ID
+ *     tags: [Services]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Service record
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Service'
+ *       404:
+ *         description: Service not found
+ */
 router.get('/:id', async (req: Request, res: Response): Promise<void> => {
   try {
     const result = await query('SELECT * FROM services WHERE id = $1', [req.params.id])
@@ -29,6 +74,28 @@ router.get('/:id', async (req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/services:
+ *   post:
+ *     summary: Create a service
+ *     tags: [Services]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ServiceInput'
+ *     responses:
+ *       201:
+ *         description: Created service
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Service'
+ *       400:
+ *         description: Title is required
+ */
 router.post('/', async (req: Request, res: Response): Promise<void> => {
   const { title, description, icon_svg, sort_order, is_active } = req.body
   if (!title?.trim()) {
@@ -48,6 +115,34 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/services/{id}:
+ *   patch:
+ *     summary: Update a service
+ *     tags: [Services]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ServiceInput'
+ *     responses:
+ *       200:
+ *         description: Updated service
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Service'
+ *       404:
+ *         description: Service not found
+ */
 router.patch('/:id', async (req: Request, res: Response): Promise<void> => {
   const { title, description, icon_svg, sort_order, is_active } = req.body
   if (!title?.trim()) {
@@ -72,6 +167,26 @@ router.patch('/:id', async (req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/services/{id}:
+ *   delete:
+ *     summary: Delete a service
+ *     tags: [Services]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Deleted
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/MessageResponse'
+ */
 router.delete('/:id', async (req: Request, res: Response): Promise<void> => {
   try {
     await query('DELETE FROM services WHERE id = $1', [req.params.id])

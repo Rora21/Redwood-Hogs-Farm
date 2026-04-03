@@ -1,3 +1,10 @@
+/**
+ * @swagger
+ * tags:
+ *   name: About
+ *   description: About page content (single record)
+ */
+
 import { Router, Request, Response } from 'express'
 import { query } from '../config/db'
 import { verifyToken } from '../middleware/auth'
@@ -5,6 +12,20 @@ import { verifyToken } from '../middleware/auth'
 const router = Router()
 router.use(verifyToken)
 
+/**
+ * @swagger
+ * /api/about:
+ *   get:
+ *     summary: Get about page content
+ *     tags: [About]
+ *     responses:
+ *       200:
+ *         description: About content record
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AboutContent'
+ */
 router.get('/', async (_req: Request, res: Response): Promise<void> => {
   try {
     const result = await query('SELECT * FROM about_content WHERE id = 1')
@@ -15,6 +36,34 @@ router.get('/', async (_req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/about:
+ *   put:
+ *     summary: Update about page content
+ *     tags: [About]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               story_heading:   { type: string, example: Our Story }
+ *               story_text_1:    { type: string }
+ *               story_text_2:    { type: string }
+ *               story_text_3:    { type: string }
+ *               story_image_url: { type: string, example: /images/uploads/story.jpg }
+ *               mission_text:    { type: string }
+ *               vision_text:     { type: string }
+ *     responses:
+ *       200:
+ *         description: Updated about content
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AboutContent'
+ */
 router.put('/', async (req: Request, res: Response): Promise<void> => {
   const {
     story_heading,

@@ -1,3 +1,10 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Pigs
+ *   description: Pig listings management
+ */
+
 import { Router, Request, Response } from 'express'
 import { query } from '../config/db'
 import { verifyToken } from '../middleware/auth'
@@ -7,6 +14,24 @@ const router = Router()
 // All routes are protected
 router.use(verifyToken)
 
+/**
+ * @swagger
+ * /api/pigs:
+ *   get:
+ *     summary: List all pigs
+ *     tags: [Pigs]
+ *     responses:
+ *       200:
+ *         description: Array of pig records
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Pig'
+ *       401:
+ *         description: Not authenticated
+ */
 router.get('/', async (_req: Request, res: Response): Promise<void> => {
   try {
     const result = await query('SELECT * FROM pigs ORDER BY sort_order ASC, created_at ASC')
@@ -17,6 +42,28 @@ router.get('/', async (_req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/pigs/{id}:
+ *   get:
+ *     summary: Get a pig by ID
+ *     tags: [Pigs]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Pig record
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pig'
+ *       404:
+ *         description: Pig not found
+ */
 router.get('/:id', async (req: Request, res: Response): Promise<void> => {
   try {
     const result = await query('SELECT * FROM pigs WHERE id = $1', [req.params.id])
@@ -31,6 +78,28 @@ router.get('/:id', async (req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/pigs:
+ *   post:
+ *     summary: Create a pig
+ *     tags: [Pigs]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/PigInput'
+ *     responses:
+ *       201:
+ *         description: Created pig
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pig'
+ *       400:
+ *         description: Name is required
+ */
 router.post('/', async (req: Request, res: Response): Promise<void> => {
   const { name, description, image_url, sort_order, is_active } = req.body
   if (!name?.trim()) {
@@ -50,6 +119,34 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/pigs/{id}:
+ *   patch:
+ *     summary: Update a pig
+ *     tags: [Pigs]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/PigInput'
+ *     responses:
+ *       200:
+ *         description: Updated pig
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pig'
+ *       404:
+ *         description: Pig not found
+ */
 router.patch('/:id', async (req: Request, res: Response): Promise<void> => {
   const { name, description, image_url, sort_order, is_active } = req.body
   if (!name?.trim()) {
@@ -74,6 +171,28 @@ router.patch('/:id', async (req: Request, res: Response): Promise<void> => {
   }
 })
 
+/**
+ * @swagger
+ * /api/pigs/{id}:
+ *   delete:
+ *     summary: Delete a pig
+ *     tags: [Pigs]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Deleted
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/MessageResponse'
+ *       401:
+ *         description: Not authenticated
+ */
 router.delete('/:id', async (req: Request, res: Response): Promise<void> => {
   try {
     await query('DELETE FROM pigs WHERE id = $1', [req.params.id])
